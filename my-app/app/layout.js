@@ -25,7 +25,7 @@ const wagmiClient = createClient({
   provider,
 });
 
-export const metadata = {
+const metadata = {
   title: "Landly",
   description: "It is about the registration on blockchain",
   keyword: "solidity, ethereum, land, registration, Blockchain",
