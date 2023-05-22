@@ -48,14 +48,13 @@ export default function register() {
   async function  register(e){
       e.preventDefault();
       try{
-       //const deploy = await deployerContract.create_contract(data.country,data.state, data.district, data.village, data.landaddress, data.landwidth, data.landheight, data.owner);      
-       //await deploy.wait();
-      //console.log("Transaction details", deploy);
+       const deploy = await deployerContract.create_contract(data.country,data.state, data.district, data.village, data.landaddress, data.landwidth, data.landheight, data.owner);      
+       await deploy.wait();
+       console.log("Transaction details", deploy);
       getNewlyDeployedContractAddress();
       }
       catch(err){
-        console.error(err);
-        toast.error("error occured see the console for details");
+        toast.error("You should be officer to register land");
       }      
   }
 
