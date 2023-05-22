@@ -1,4 +1,4 @@
-export const deployerContractAddress = "0xFB8fc70274DF7771cBaa9ebd3AeBB767Ae1864e7"
+export const deployerContractAddress = "0xC24B708619085238170b807DbAD94686E9763f79"
 export const deployerContractABI =  [
     {
       "inputs": [

@@ -3,6 +3,8 @@
 import {useState} from "react";
 import {useContract, useSigner, useProvider} from "wagmi";
 import {deployerContractAddress, deployerContractABI} from "../../constants/index";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function register() {
@@ -46,14 +48,35 @@ export default function register() {
   async function  register(e){
       e.preventDefault();
       try{
-      const deploy = await deployerContract.create_contract(data.country,data.state, data.district, data.village, data.landaddress, data.landwidth, data.landheight, data.owner);      
-      await deploy.wait();
-      alert("land registered successfully ")
-         
+       //const deploy = await deployerContract.create_contract(data.country,data.state, data.district, data.village, data.landaddress, data.landwidth, data.landheight, data.owner);      
+       //await deploy.wait();
+      //console.log("Transaction details", deploy);
+      getNewlyDeployedContractAddress();
       }
       catch(err){
-        alert(err)
+        console.error(err);
+        toast.error("error occured see the console for details");
       }      
+  }
+
+  async function getNewlyDeployedContractAddress(){
+    try{
+       
+      let address = await deployerContract.getdeployedContractAddress();
+      
+      console.log("Address here :", address);
+      /*const copyAddress = address.then(
+        (promise) => promise
+      );*/
+
+      await navigator.clipboard.writeText(address);
+      toast.success("contract address added to clipboard successfully");
+
+    }
+    catch(err){
+       console.error(err);
+        toast.error("error occured see the console for details");  
+    }
   }
 
 

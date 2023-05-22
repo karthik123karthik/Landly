@@ -9,9 +9,8 @@ function Navbar() {
          <ul className='navItems'>
              <li ><Link href="/">Home</Link></li>
              <li ><Link href="/register">register</Link></li>
-             <li ><Link href="/register">get Details</Link></li>
-             <li ><Link href="/">land</Link></li>
-             <li ><Link href="/">history</Link></li>
+             <li ><Link href="/register">get details/transfer</Link></li>
+             <li ><Link href="/history">history</Link></li>
              <li ><Link href="/about">about</Link></li>
              <li ><ConnectButton accountStatus="address" chainStatus="none" showBalance={false}/></li>
          </ul>
