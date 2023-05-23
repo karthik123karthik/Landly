@@ -6,13 +6,11 @@ contract Owner{
     
     address public currentOwner;
     address[] public previousOwners;
-    address public officer;
 
-    event newowner(address owner);
-    event transferRight(address previous, address current);
+     event newowner(address owner);
+     event transferRight(address previous, address current);
 
     constructor(address _owner){
-        officer = msg.sender;
        currentOwner = _owner;
        emit newowner(_owner);
     }

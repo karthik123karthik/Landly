@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-//0xC24B708619085238170b807DbAD94686E9763f79
+//0x72c842024b3f2F17559aDf94F754B9Bb3292e635
 
 pragma solidity^0.8.0;
 
@@ -29,8 +29,14 @@ contract Landregister is Owner{
 
 contract deploy{
     Landregister[] public contractaddress;
+    address public officer;
+
+    constructor(){
+        officer = msg.sender;
+    }
 
     function create_contract(string memory _country, string memory _state, string memory _district, string memory _village, string memory _Address, string memory _width, string memory _height, address buyer)public {
+          require(msg.sender == officer,"You do not have rights to create");
           Landregister newland = new Landregister(_country, _state, _district, _village, _Address, _width, _height, buyer);
           contractaddress.push(newland);
     }

@@ -1,99 +1,117 @@
-export const deployerContractAddress = "0xC24B708619085238170b807DbAD94686E9763f79"
+export const deployerContractAddress = "0x72c842024b3f2F17559aDf94F754B9Bb3292e635"
 export const deployerContractABI =  [
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "contractaddress",
-      "outputs": [
-        {
-          "internalType": "contract Landregister",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_country",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_state",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_district",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_village",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_Address",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_width",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_height",
-          "type": "string"
-        },
-        {
-          "internalType": "address",
-          "name": "buyer",
-          "type": "address"
-        }
-      ],
-      "name": "create_contract",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getallcontracts",
-      "outputs": [
-        {
-          "internalType": "contract Landregister[]",
-          "name": "",
-          "type": "address[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getdeployedContractAddress",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ]
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "contractaddress",
+    "outputs": [
+      {
+        "internalType": "contract Landregister",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_country",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_state",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_district",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_village",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_Address",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_width",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_height",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      }
+    ],
+    "name": "create_contract",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getallcontracts",
+    "outputs": [
+      {
+        "internalType": "contract Landregister[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getdeployedContractAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "officer",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
 
   export const landContractABI = [
     {
@@ -253,19 +271,6 @@ export const deployerContractABI =  [
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "officer",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -337,3 +342,4 @@ export const deployerContractABI =  [
       "type": "function"
     }
   ]
+       

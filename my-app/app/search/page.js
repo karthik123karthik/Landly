@@ -80,7 +80,7 @@ function search() {
         toast.success("Ownership transfered !!!!!!!");
         handleClose();
       } catch (err) {
-        toast.error("you are not the owner !!!! ");
+        toast.error("you are not the owner of this land !!!! ");
         handleClose();
       }
     }
@@ -109,7 +109,7 @@ function search() {
   return (
     <div>
       <h1 className="block text-center text-gray-100 text-xl font-bold my-2">
-        SEARCH YOUR LAND ADDRESS
+        SEARCH YOUR LAND DETAILS
       </h1>
       <div className="w-[80vw] h-[20vh] mx-auto  flex flex-row justify-center items-center">
         <input
