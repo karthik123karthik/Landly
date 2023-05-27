@@ -1,4 +1,4 @@
-export const deployerContractAddress = "0x72c842024b3f2F17559aDf94F754B9Bb3292e635"
+export const deployerContractAddress = "0xa38d2bc1953095eF5707b0e454F2fE1100d37F54"
 export const deployerContractABI =  [
   {
     "inputs": [],
@@ -343,7 +343,7 @@ export const deployerContractABI =  [
     }
   ]
 
-  export const landNFT = "0x84A69Ebc12dDF7D5344eDAdB2D9A9a40dC825781"
+  export const landNFT = "0xDC5c874D2C3f5e3A2BCC7ab7e9b0A4Dd12b956B0"
 
   export const landNFTABI = [
     {
