@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useProvider, useSigner, useContract } from "wagmi";
-import { landContractABI } from "@/constants";
+import { landContractABI, landNFT, landNFTABI } from "@/constants";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dialog from "@mui/material/Dialog";
@@ -31,6 +31,12 @@ function search() {
     contractInterface: landContractABI,
     signerOrProvider: signer || provider,
   });
+
+  const NFTContract = useContract({
+    addressOrName:landNFT,
+    contractInterface:landNFTABI,
+    signerOrProvider: signer || provider
+    });
 
   function handleOnChange(e) {
     setAddress(e.target.value);
@@ -68,15 +74,19 @@ function search() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    let address = form.text;
+    let newaddress = form.text;
 
     if (address.length !== 42) {
       toast.error("enter a valid address");
       handleClose();
     } else {
       try {
-        let tx = await landContract.transferRights(address);
+        let tx = await landContract.transferRights(newaddress);
         await tx.wait();
+        toast.success("transfering nft now...");
+        let tokenid = await NFTContract.gettokenid(address)
+        tx = await NFTContract.transferFrom(data['owner'], newaddress, tokenid);
+        await tx.wait(); 
         toast.success("Ownership transfered !!!!!!!");
         handleClose();
       } catch (err) {

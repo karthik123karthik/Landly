@@ -2,9 +2,12 @@
 
 import {useState} from "react";
 import {useContract, useSigner, useProvider} from "wagmi";
-import {deployerContractAddress, deployerContractABI} from "../../constants/index";
+import {deployerContractAddress, deployerContractABI, landNFTABI, landNFT} from "../../constants/index";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { NFTStorage, File } from 'nft.storage';
+
+
 
 
 export default function register() {
@@ -17,6 +20,12 @@ export default function register() {
     addressOrName: deployerContractAddress,
     contractInterface: deployerContractABI,
     signerOrProvider: signer || provider
+  });
+
+  const NFTContract = useContract({
+  addressOrName:landNFT,
+  contractInterface:landNFTABI,
+  signerOrProvider: signer || provider
   });
   
 
@@ -48,10 +57,10 @@ export default function register() {
   async function  register(e){
       e.preventDefault();
       try{
-       const deploy = await deployerContract.create_contract(data.country,data.state, data.district, data.village, data.landaddress, data.landwidth, data.landheight, data.owner);      
-       await deploy.wait();
-       console.log("Transaction details", deploy);
-      getNewlyDeployedContractAddress();
+         const deploy = await deployerContract.create_contract(data.country,data.state, data.district, data.village, data.landaddress, data.landwidth, data.landheight, data.owner);      
+         await deploy.wait();
+         console.log("Transaction details", deploy);
+       getNewlyDeployedContractAddress();
       }
       catch(err){
         toast.error("You should be officer to register land");
@@ -60,16 +69,41 @@ export default function register() {
 
   async function getNewlyDeployedContractAddress(){
     try{
-       
-      let address = await deployerContract.getdeployedContractAddress();
+     
+     toast.success("contract started deploying...")
+     let address = await deployerContract.getdeployedContractAddress();
       
-      console.log("Address here :", address);
+     console.log("Address here :", address);
       /*const copyAddress = address.then(
         (promise) => promise
       );*/
 
+      const NFT_STORAGE_TOKEN = process.env.API_KEY;
+       const client = new NFTStorage({ token: NFT_STORAGE_TOKEN })
+       console.log( NFT_STORAGE_TOKEN)
       await navigator.clipboard.writeText(address);
       toast.success("contract address added to clipboard successfully");
+   
+      toast.success("uploading metadata started")
+     const img = await convertFileToBlob();
+
+      const metadata = await client.store({
+        name: 'Landly Owner',
+        description: `Your land contract address - ${address} . This is to verify that you are the Owner of this land `,
+        image: img
+      })
+      
+      let pretokenURI = `https://ipfs.io/${metadata.url}`
+      let tokenURI = pretokenURI.replace("ipfs://","ipfs/");
+      toast.success("metadata upladed success fully");
+
+      toast.success("started minting nft....");
+
+      let txn = await NFTContract.mint(tokenURI, data['owner'], address);
+
+      await txn.wait();
+
+      toast.success("nft successfully minted...")
 
     }
     catch(err){
@@ -77,6 +111,16 @@ export default function register() {
         toast.error("error occured see the console for details");  
     }
   }
+
+
+  const convertFileToBlob = async () => {
+    const fileLocation = '/landlyNFT.jpg';
+    const response = await fetch(fileLocation);
+    const blob = await response.blob();
+    const file = new File([blob], 'landlyNFT.jpg', { type: blob.type });
+    return file;
+  };
+
 
 
 
