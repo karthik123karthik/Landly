@@ -40,7 +40,8 @@ export default function register() {
     landaddress:"",
     landwidth:"",
     landheight:"",
-    owner:""
+    owner:"",
+    survey:""
   });
 
 ////////// handle on change /////////////////
@@ -57,14 +58,31 @@ export default function register() {
   async function  register(e){
       e.preventDefault();
       try{
-         const deploy = await deployerContract.create_contract(data.country,data.state, data.district, data.village, data.landaddress, data.landwidth, data.landheight, data.owner);      
-         await deploy.wait();
-         console.log("Transaction details", deploy);
-       getNewlyDeployedContractAddress();
-      }
+          let res = await deployerContract.registered(data.survey);
+          if(res === false){
+            await deploycontract();
+          }
+          else throw new Error("land already registered");
+      } 
       catch(err){
-        toast.error("You should be officer to register land");
-      }      
+        console.log(err)
+        toast.error("This Land is already registered!!!!");
+      }
+  }
+
+
+  ///////////////// deploy function ////////////////
+
+  async function deploycontract(){
+    try{
+      const deploy = await deployerContract.create_contract(data.country,data.state, data.district, data.village, data.landaddress, data.landwidth, data.landheight, data.owner, data.survey);      
+      await deploy.wait();
+      console.log("Transaction details", deploy);
+     getNewlyDeployedContractAddress();
+   }
+   catch(err){
+     toast.error("you are not the officer");
+   }      
   }
 
   async function getNewlyDeployedContractAddress(){
@@ -228,7 +246,7 @@ export default function register() {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="landheight"
           >
-            Land Width
+            Land Height
           </label>
           <input
             className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -255,7 +273,23 @@ export default function register() {
             required={true}
           />
         </div>
-        <div>        
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="owner"
+          >
+            SURVEY NUMBER
+          </label>
+          <input
+            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            name="survey"
+            type="number"
+            placeholder="Enter Survey Number"
+            onChange = {onInputChange}
+            required={true}
+          />
+        </div>
+        <div>       
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
         Submit
       </button>

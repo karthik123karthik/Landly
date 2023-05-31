@@ -53,6 +53,7 @@ function search() {
       let width = await landContract.width();
       let owner = await landContract.currentOwner();
       let allowners = await landContract.getOwners();
+      let survey = await landContract.survey();
       setData({
         country: country,
         state: state,
@@ -62,6 +63,7 @@ function search() {
         length: length,
         width: width,
         owner: owner,
+        survey: survey
       });
 
       setOwners(allowners);
@@ -148,6 +150,7 @@ function search() {
           <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 border-b-2">{`LENGTH - ${data.length} in feets`}</h1>
           <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 border-b-2">{`WIDTH - ${data.width} in feets`}</h1>
           <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 border-b-2">{`OWNER - ${data.owner}`}</h1>
+          <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 border-b-2">{`SURVEY-NUMBER - ${data.survey}`}</h1>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             onClick={handleClickOpen}

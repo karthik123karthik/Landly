@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-//0xa38d2bc1953095eF5707b0e454F2fE1100d37F54
+//0xF958C99Af17be1f661BC51548C114362E8069B1B
 
 pragma solidity^0.8.0;
 
@@ -14,8 +14,9 @@ contract Landregister is Owner{
     string public landaddress;
     string public length;
     string public width;
+    uint public survey;
     
-    constructor(string memory _country, string memory _state, string memory _district, string memory _village,string memory _Address, string memory _width, string memory _height, address _owner)Owner(_owner){
+    constructor(string memory _country, string memory _state, string memory _district, string memory _village,string memory _Address, string memory _width, string memory _height, address _owner, uint _survey)Owner(_owner){
         country = _country;
         state = _state;
         district = _district;
@@ -23,6 +24,7 @@ contract Landregister is Owner{
         landaddress = _Address;
         length = _height;
         width = _width;
+        survey = _survey;
     }   
 
 }
@@ -30,15 +32,18 @@ contract Landregister is Owner{
 contract deploy{
     Landregister[] public contractaddress;
     address public officer;
+    mapping(uint => bool)public registered;
 
     constructor(){
         officer = msg.sender;
     }
 
-    function create_contract(string memory _country, string memory _state, string memory _district, string memory _village, string memory _Address, string memory _width, string memory _height, address buyer)public {
+    function create_contract(string memory _country, string memory _state, string memory _district, string memory _village, string memory _Address, string memory _width, string memory _height, address buyer, uint survey)public {
           require(msg.sender == officer,"You do not have rights to create");
-          Landregister newland = new Landregister(_country, _state, _district, _village, _Address, _width, _height, buyer);
+          require(!registered[survey], "land already registered");
+          Landregister newland = new Landregister(_country, _state, _district, _village, _Address, _width, _height, buyer, survey);
           contractaddress.push(newland);
+          registered[survey] = true;
     }
 
     function getdeployedContractAddress()public view returns(address){
