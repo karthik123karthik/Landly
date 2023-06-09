@@ -3,9 +3,11 @@ import Link from "next/link";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 function Navbar() {
+
+
   return (
     <nav className='navbar'>
-         <h1 className='logo'>LANDLY</h1>         
+         <h1 className='logo'>LANDLY</h1>       
          <ul className='navItems'>
              <li className='hover:text-sm text-[0.8em]'  style={{'text-shadow': '5px 5px 40px hsl(0, 0%, 6%)','color':"#fbf8f0"}} ><Link href="/">HOME</Link></li>
              <li className='hover:text-sm text-[0.8em]' style={{'text-shadow': '5px 5px 40px hsl(0, 0%, 6%)', 'color':"#fbf8f0" }} ><Link href="/register">REGISTER</Link></li>
