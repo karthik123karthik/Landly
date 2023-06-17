@@ -56,6 +56,7 @@ export default function register() {
 
   //////// handle on click ////////////////////
   async function  register(e){
+    toast.success("Registration is starting");
       e.preventDefault();
       try{
           let res = await deployerContract.registered(data.survey);
@@ -122,6 +123,7 @@ export default function register() {
       await txn.wait();
 
       toast.success("nft successfully minted...")
+      toast.success("land registred successfully");
 
     }
     catch(err){

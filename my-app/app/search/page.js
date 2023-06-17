@@ -11,6 +11,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
+import Loading from "../loading.js";
 
 function search() {
   const [address, setAddress] = useState("");
@@ -20,6 +21,7 @@ function search() {
     text: "",
   });
   const [owners, setOwners] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   //////create interface for contract ////////////
 
@@ -44,6 +46,7 @@ function search() {
 
   async function handleData() {
     try {
+      setLoading(true);
       let country = await landContract.country();
       let state = await landContract.state();
       let district = await landContract.district();
@@ -67,6 +70,7 @@ function search() {
       });
 
       setOwners(allowners);
+      setLoading(false);
     } catch (err) {
       toast.error("Your address is not valid");
     }
@@ -139,7 +143,7 @@ function search() {
           search
         </button>
       </div>
-      {Object.keys(data).length > 0 ? (
+      { loading? <Loading/>: Object.keys(data).length > 0 ? (
         <div className="w-[80vw]  mx-auto  flex flex-col  font-bold text-black p-6 bg-white border border-gray-200 rounded-lg shadow">
           <h2 className="text-black text-center font-bold text-xl border-b-2">LAND DETAILS</h2>
           <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-700 border-b-2 ">{`COUNTRY - ${data.country}`}</h1>

@@ -6,6 +6,7 @@ import {
   deployerContractAddress,
   deployerContractABI,
 } from "../../constants/index.js";
+import Loading from "./loading.js";
 
 function history() {
 
@@ -20,6 +21,7 @@ function history() {
   ////////////////////////////////////////////////////////////
 
   const [contracts, setContracts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
@@ -32,9 +34,11 @@ function history() {
 
   async function getallContracts() {
     try {
+      setLoading(true)
       let contracts = await deployerContract.getallcontracts()
       await contracts;
       setContracts(contracts);
+      setLoading(false)
     }
     catch (err) {
       console.log(err);
@@ -45,13 +49,15 @@ function history() {
   return (
     <div className="w-[80vw] mx-auto flex flex-col justify-center items-center p-3">
       <h1 className="font-bold text-white text-xl mb-3">Deployed Contracts using Landly</h1>
-      {contracts.length > 0 && contracts.map((ele, idx) => 
+     {loading? <Loading/>: 
+      contracts.length > 0 && contracts.map((ele, idx) => 
       { return(
       <div className="w-[70%] bg-white text-black text-xl font-bold p-3 rounded m-3">
        <h1>{`Contract ${idx+1}`}</h1>
        <div>{`Address - ${ele}`}</div>
        </div>
-      )})}
+      )})
+}
     </div>
   )
 }
