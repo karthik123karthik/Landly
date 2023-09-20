@@ -5,6 +5,8 @@ pragma solidity^0.8.0;
 
 import "./Ownable.sol";
 
+//contract is same as a class
+
 contract Landregister is Owner{
    
     string public country;
