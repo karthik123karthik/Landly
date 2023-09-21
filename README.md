@@ -2,7 +2,7 @@
 
 ### VISIT HERE - https://landly-beta.vercel.app/
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### description :
 - Landly is a decentralized application that helps the process of recording and verifying property ownership and transactions using blockchain technology, providing a secure and transparent decentralized system for land-related activities.
